@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: api_keys
+#
+#  id           :integer          not null, primary key
+#  access_token :string(255)
+#  user_id      :integer
+#
+
 class ApiKey < ActiveRecord::Base
   belongs_to :user
 
