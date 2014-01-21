@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121032808) do
+ActiveRecord::Schema.define(version: 20140121033659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20140121032808) do
   enable_extension "postgis_topology"
   enable_extension "fuzzystrmatch"
   enable_extension "postgis_tiger_geocoder"
+
+  create_table "api_keys", force: true do |t|
+    t.string  "access_token"
+    t.integer "user_id"
+  end
+
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", using: :btree
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "spatial_ref_sys", id: false, force: true do |t|
     t.integer "srid",                   null: false
