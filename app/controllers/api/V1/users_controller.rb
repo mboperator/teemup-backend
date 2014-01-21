@@ -13,6 +13,10 @@ module Api
         end
       end
 
+      def show
+        respond_with current_user
+      end
+
       private
       def user_params
         params
