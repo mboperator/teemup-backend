@@ -3,43 +3,51 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use postgresql as the database for Active Record
+gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'active_model_serializers'
+gem 'awesome_print'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 gem 'pg'
-
-# Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
-
-# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
 gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+group :development do
+  gem 'annotate'
+  gem 'git_remote_branch'
+  gem 'quiet_assets'
+  gem 'letter_opener'
+  gem 'letter_opener_web', '~> 1.1.0'
+  gem 'foreman'
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+group :test do
+  gem "codeclimate-test-reporter", require: nil
+  gem 'cucumber', '1.2.5'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'guard-cucumber'
+  gem 'guard-rspec'
+  gem 'guard-spring'
+  gem 'json_spec'
+  gem 'spring-commands-rspec'
+  gem 'spring-commands-cucumber'
+end
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :development, :test do
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-byebug'
+  gem 'rspec-rails'
+  gem 'spring'
+end
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :doc do
+  gem 'sdoc', require: false
+end
