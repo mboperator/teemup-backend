@@ -13,6 +13,14 @@ module Api
         end
       end
 
+      def update
+        if current_user.update_attributes(user_params)
+          render json: { success: true }, status: :updated
+        else
+          render json: { success: false }, status: :bad_request
+        end
+      end
+
       def show
         respond_with current_user
       end
