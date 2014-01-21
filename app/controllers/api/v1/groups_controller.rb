@@ -10,7 +10,6 @@ module Api
         @groups = current_user.groups
 
         respond_to do |format|
-          format.html # index.html.haml
           format.json { render json: @groups }
         end
       end
@@ -21,7 +20,6 @@ module Api
         @group = Group.find_by(id: params[:id])
         if current_user.groups.include?(@group)
           respond_to do |format|
-            format.html # show.html.haml
             format.json { render json: @group }
           end
         else
@@ -74,6 +72,7 @@ module Api
       def group_params
         params.require(:group).permit(:name, :creator)
       end
+
     end
   end
 end

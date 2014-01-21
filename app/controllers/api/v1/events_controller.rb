@@ -9,7 +9,6 @@ module Api
         @events = @group.events
 
         respond_to do |format|
-          format.html # index.html.haml
           format.json { render json: @events }
         end
       end
@@ -19,7 +18,6 @@ module Api
         @event = Event.find_by(id: params[:id])
 
         respond_to do |format|
-          format.html # show.html.haml
           format.json { render json: @event }
         end
       end
