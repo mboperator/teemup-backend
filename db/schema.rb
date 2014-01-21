@@ -16,25 +16,14 @@ ActiveRecord::Schema.define(version: 20140121033659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
-  enable_extension "postgis_topology"
-  enable_extension "fuzzystrmatch"
-  enable_extension "postgis_tiger_geocoder"
 
   create_table "api_keys", force: true do |t|
     t.string  "access_token"
     t.integer "user_id"
   end
 
-  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", using: :btree
-  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
-
-  create_table "spatial_ref_sys", id: false, force: true do |t|
-    t.integer "srid",                   null: false
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
-  end
+  add_index "api_keys", ["access_token"], :name => "index_api_keys_on_access_token"
+  add_index "api_keys", ["user_id"], :name => "index_api_keys_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email"
