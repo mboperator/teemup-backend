@@ -18,4 +18,12 @@ class Event < ActiveRecord::Base
   belongs_to :created_by, class_name: "User"
   belongs_to :group
   belongs_to :location
+  has_many :event_invites
+  has_many :users, through: :event_invites
+  has_many :confirmed_event_invites, -> { merge(EventInvite.confirmed) }, class_name: 'EventInvite'
+  has_many :confirmed_users, through: :confirmed_event_invites, source: :user
+
+  def grab_invite
+    event_invites.find_by(user: created_by)
+  end
 end

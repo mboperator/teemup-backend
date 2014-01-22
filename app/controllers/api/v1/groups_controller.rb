@@ -22,8 +22,8 @@ module Api
         @group.created_by = current_user
         if @group.save
           @group.users << current_user
-          @group.grab_membership(current_user).make_admin
-          @group.grab_membership(current_user).make_confirm
+          @group.grab_membership.make_admin
+          @group.grab_membership.make_confirm
           respond_with @group
         else
           render json: {success: false}, status: :unprocessable_entity

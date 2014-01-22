@@ -18,8 +18,12 @@ class Group < ActiveRecord::Base
   has_many :users, through: :group_memberships
   belongs_to :created_by, class_name: "User"
 
-  def grab_membership(user)
+  def grab_membership
     group_memberships.find_by(user: created_by)
+  end
+
+  def check_admin(user)
+    admin_memberships.exists?(user: user)
   end
 
 end

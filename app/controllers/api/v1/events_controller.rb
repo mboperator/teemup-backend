@@ -13,10 +13,12 @@ module Api
 
       def create
         @event = Event.new(event_params)
-        @event.creator = current_user
-        @event.group = Group.find_by(params[:group_id])
-
+        @event.created_by = current_user
         if @event.save
+          @event.group = Group.find_by(params[:group_id])
+          @event.users << current_user
+          @event.grab_invite.make_admin
+          @event.grab_invite.make_confirm
           respond_with @event
         else
           render json: {success: false}, status: :unprocessable_entity
@@ -24,7 +26,7 @@ module Api
       end
 
       def update
-        @event = Event.new(params[:event])
+        @event = Event.find_by(params[:id])
 
         if @event.update_attributes(event_params)
           respond_with @event

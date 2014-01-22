@@ -17,10 +17,16 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :api_keys
+
   has_many :confirmed_memberships, -> { merge(GroupMembership.confirmed) }, class_name: 'GroupMembership'
   has_many :confirmed_groups, through: :confirmed_memberships, source: :group
   has_many :groups, through: :group_memberships
   has_many :group_memberships
+
+  has_many :event_invites
+  has_many :events, through: :event_invites
+  has_many :confirmed_event_invites, -> { merge(EventInvite.confirmed) }, class_name: 'EventInvite'
+  has_many :confirmed_events, through: :confirmed_event_invites, source: :event
 
   validates :email, presence: true, uniqueness: true, format: /\A*.+@.+\z/
   validates :password, presence: true, length: { minimum: 6 }, if: :password
