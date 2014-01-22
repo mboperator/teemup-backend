@@ -1,76 +1,54 @@
 module Api
-  module v1
+  module V1
     class GroupsController < ApiController
       responds_to :json
 
-      # GET /groups
-      # GET /groups.json
       def index
         @user = current_user
         @groups = current_user.groups
-
-        respond_to do |format|
-          format.json { render json: @groups }
-        end
+        respond_with @groups
       end
 
-      # GET /groups/1
-      # GET /groups/1.json
       def show
         @group = Group.find_by(id: params[:id])
         if current_user.groups.include?(@group)
-          respond_to do |format|
-            format.json { render json: @group }
-          end
+          respond_with @group
         else
-
+          render json: { success: false }, status: :unauthorized
         end
       end
 
-      # POST /groups
-      # POST /groups.json
       def create
         @group = Group.new(group_params)
         @group.creator = current_user
-
-
-        respond_to do |format|
-          if @group.save
-            format.json { render json: @group, status: :created, location: @group }
-          else
-            format.json { render json: @group.errors, status: :unprocessable_entity }
-          end
+        if @group.save
+          respond_with @group
+        else
+          render json: {success: false}, status: :unprocessable_entity
         end
       end
 
-      # PUT /groups/1
-      # PUT /groups/1.json
       def update
         @group = Group.new(params[:group])
 
-        respond_to do |format|
-          if @group.update_attributes(group_params)
-            format.json { head :no_content }
-          else
-            format.json { render json: @group.errors, status: :unprocessable_entity }
-          end
+        if @group.update_attributes(group_params)
+          respond_with @group
+        else
+          render json: {success: false}, status: :unprocessable_entity
         end
       end
 
-      # DELETE /groups/1
-      # DELETE /groups/1.json
       def destroy
         @group = Group.find_by(params[:id])
         @group.destroy
-
-        respond_to do |format|
-          format.json { head :no_content }
-        end
+        render json: { success: true }, status: :accepted
       end
 
       private
       def group_params
-        params.require(:group).permit(:name, :creator)
+        params
+          .require(:group)
+          .permit(:name, :creator)
       end
 
     end

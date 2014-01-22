@@ -25,3 +25,7 @@
 .idea/scopes/scope_settings.xml
 .idea/teemup-backend.iml
 .idea/vcs.xml
+.idea/runConfigurations/Development__teemup_backend.xml
+.idea/runConfigurations/Production__teemup_backend.xml
+.idea/runConfigurations/spec__teemup_backend.xml
+.idea/runConfigurations/test__teemup_backend.xml

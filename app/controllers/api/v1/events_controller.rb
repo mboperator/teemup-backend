@@ -1,54 +1,37 @@
 module Api
-  module v1
+  module V1
     class EventsController < ApiController
       responds_to :json
-
-      # GET /group/:group_id/events.json
       def index
         @group = Group.find_by(id: params[:group_id])
-        @events = @group.events
-
-        respond_to do |format|
-          format.json { render json: @events }
-        end
+        respond_with @group.events
       end
 
-      # GET /group/:group_id/events/:id.json
       def show
-        @event = Event.find_by(id: params[:id])
-
-        respond_to do |format|
-          format.json { render json: @event }
-        end
+        respond_with Event.find_by(id: params[:id])
       end
 
-      # POST /group/:group_id/events.json
       def create
         @event = Event.new(event_params)
         @event.creator = current_user
         @event.group = Group.find_by(params[:group_id])
 
-
-        respond_to do |format|
-          if @event.save
-            format.json { render json: @event, status: :created, location: @event }
-          else
-            format.json { render json: @event.errors, status: :unprocessable_entity }
-          end
+        if @event.save
+          respond_with @event
+        else
+          render json: {success: false}, status: :unprocessable_entity
         end
       end
 
-      # PUT /group/:group_id/events/:id.json
       def update
         @event = Event.new(params[:event])
 
-        respond_to do |format|
-          if @event.update_attributes(event_params)
-            format.json { head :no_content }
-          else
-            format.json { render json: @event.errors, status: :unprocessable_entity }
-          end
+        if @event.update_attributes(event_params)
+          respond_with @event
+        else
+          render json: {success: false}, status: :unprocessable_entity
         end
+
       end
 
       # DELETE /group/:group_id/events/:id.json
@@ -56,14 +39,12 @@ module Api
         @event = Event.find_by(params[:id])
         @event.destroy
 
-        respond_to do |format|
-          format.json { head :no_content }
-        end
+        render json: { success: true }, status: :accepted
       end
 
       private
       def event_params
-        params.require(:event).permit(:name, :subtitle, :creator, :location => { :lat, :lon })
+        params.require(:event).permit(:name, :subtitle, :creator, :location => [:lat, :lon ])
       end
 
     end
