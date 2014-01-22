@@ -1,7 +1,7 @@
 module Api
   module V1
     class EventsController < ApiController
-      responds_to :json
+      respond_to :json
       def index
         @group = Group.find_by(id: params[:group_id])
         respond_with @group.events

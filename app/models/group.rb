@@ -12,6 +12,7 @@
 
 class Group < ActiveRecord::Base
   has_many :group_memberships
+  has_many :events
   has_many :admin_memberships, -> { merge(GroupMembership.admins) }, class_name: 'GroupMembership'
   has_many :admins, through: :admin_memberships, source: :user
   has_many :users, through: :group_memberships
