@@ -1,7 +1,6 @@
 module Api
   module V1
     class GroupsController < ApiController
-      responds_to :json
 
       def index
         @user = current_user
@@ -20,8 +19,11 @@ module Api
 
       def create
         @group = Group.new(group_params)
-        @group.creator = current_user
+        @group.created_by = current_user
         if @group.save
+          @group.users << current_user
+          @group.grab_membership(current_user).make_admin
+          @group.grab_membership(current_user).make_confirm
           respond_with @group
         else
           render json: {success: false}, status: :unprocessable_entity
@@ -29,7 +31,7 @@ module Api
       end
 
       def update
-        @group = Group.new(params[:group])
+        @group = Group.find_by(id: params[:id])
 
         if @group.update_attributes(group_params)
           respond_with @group
@@ -39,7 +41,7 @@ module Api
       end
 
       def destroy
-        @group = Group.find_by(params[:id])
+        @group = Group.find_by(id: params[:id])
         @group.destroy
         render json: { success: true }, status: :accepted
       end
@@ -48,7 +50,7 @@ module Api
       def group_params
         params
           .require(:group)
-          .permit(:name, :creator)
+          .permit(:name, :created_by, :description)
       end
 
     end
