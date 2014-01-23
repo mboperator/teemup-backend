@@ -14,24 +14,25 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-#
 development:
   adapter: postgis
   encoding: unicode
-  database: teemup_development
+  database: teemup
   pool: 5
-  username: teemup
-  password: t33mu9!
-  su_username: postgres
-  su_password: dv0r@k!@
-  postgis_extension: postgis
-  schema_search_path: '"$user", public, postgis'
+  username: teemup_db
+  password: t33mup
+  su_username: teemup_db_creator
+  su_password: t33mupcreator
+  schema_search_path: "public,postgis"
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  host: localhost
-  port: 5432
+  #host: localhost
+
+  # The TCP port the server listens on. Defaults to 5432.
+  # If your server runs on a different port number, change accordingly.
+  #port: 5432
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public

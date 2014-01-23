@@ -9,7 +9,7 @@ class GroupSerializer < ActiveModel::Serializer
   end
 
   def created_by
-    "#{object.created_by.first_name} #{object.created_by.last_name}"
+    User.find(object.created_by_id).full_name
   end
 
   def members
