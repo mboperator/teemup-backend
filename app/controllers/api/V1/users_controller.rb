@@ -2,7 +2,6 @@ module Api
   module V1
     class UsersController < ApiController
       skip_before_filter :api_authorize, only: :create
-      respond_to :json
 
       def create
         user = User.new(user_params)

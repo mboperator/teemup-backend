@@ -19,6 +19,7 @@ class GroupMembership < ActiveRecord::Base
   validates :group, presence: true
 
   scope :confirmed, -> { where(is_confirmed: true) }
+  scope :admins, -> { where(is_admin: true ) }
 
   def make_confirm
     update_attributes(is_confirmed: true)

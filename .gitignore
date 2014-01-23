@@ -14,3 +14,18 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.idea/.generators
+.idea/.name
+.idea/.rakeTasks
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/teemup-backend.iml
+.idea/vcs.xml
+.idea/runConfigurations/Development__teemup_backend.xml
+.idea/runConfigurations/Production__teemup_backend.xml
+.idea/runConfigurations/spec__teemup_backend.xml
+.idea/runConfigurations/test__teemup_backend.xml
