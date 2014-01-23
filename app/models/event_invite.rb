@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: event_invites
+#
+#  id           :integer          not null, primary key
+#  user_id      :integer
+#  event_id     :integer
+#  is_admin     :boolean
+#  is_confirmed :boolean
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class EventInvite < ActiveRecord::Base
   belongs_to :event
   belongs_to :user

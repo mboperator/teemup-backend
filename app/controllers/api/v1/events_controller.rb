@@ -17,9 +17,9 @@ module Api
         if @event.save
           @event.group = Group.find_by(params[:group_id])
           @event.users << current_user
-          @event.grab_invite.make_admin
-          @event.grab_invite.make_confirm
-          respond_with @event
+          @event.grab_invite(current_user).make_admin
+          @event.grab_invite(current_user).make_confirm
+          render json: { success: true }, status: :ok
         else
           render json: {success: false}, status: :unprocessable_entity
         end
@@ -46,7 +46,8 @@ module Api
 
       private
       def event_params
-        params.require(:event).permit(:name, :subtitle, :creator, :location => [:lat, :lon ])
+        params.require(:event)
+              .permit(:name, :subtitle, :creator, :start_time, :duration, :location => [:lat, :lon ])
       end
 
     end
