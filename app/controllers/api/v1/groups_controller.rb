@@ -18,10 +18,10 @@ module Api
       end
 
       def create
-        group = Group.new(group_params.merge(created_by_id: current_user.id)
+        group = Group.new(group_params.merge(created_by_id: current_user.id))
         if group.save
           current_user.group_memberships.create(group_id: group.id, is_admin: true, is_confirmed: true)
-          respond_with group
+          head :ok
         else
           render json: {success: false}, status: :unprocessable_entity
         end
