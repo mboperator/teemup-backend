@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   after_save :create_access_token
 
+  def full_name
+    [first_name, last_name].join(' ').presence || email
+  end
+
   private
   def create_access_token
     self.api_keys.create!
