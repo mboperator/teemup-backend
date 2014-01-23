@@ -18,13 +18,10 @@ module Api
       end
 
       def create
-        @group = Group.new(group_params)
-        @group.created_by = current_user
-        if @group.save
-          @group.users << current_user
-          @group.grab_membership.make_admin
-          @group.grab_membership.make_confirm
-          respond_with @group
+        group = Group.new(group_params.merge(created_by_id: current_user.id)
+        if group.save
+          current_user.group_memberships.create(group_id: group.id, is_admin: true, is_confirmed: true)
+          respond_with group
         else
           render json: {success: false}, status: :unprocessable_entity
         end
@@ -32,7 +29,6 @@ module Api
 
       def update
         @group = Group.find_by(id: params[:id])
-
         if @group.update_attributes(group_params)
           respond_with @group
         else
@@ -41,8 +37,7 @@ module Api
       end
 
       def destroy
-        @group = Group.find_by(id: params[:id])
-        @group.destroy
+        Group.find_by(id: params[:id]).destroy
         render json: { success: true }, status: :accepted
       end
 
@@ -50,7 +45,7 @@ module Api
       def group_params
         params
           .require(:group)
-          .permit(:name, :created_by, :description)
+          .permit(:name, :created_by_id, :description)
       end
 
     end
