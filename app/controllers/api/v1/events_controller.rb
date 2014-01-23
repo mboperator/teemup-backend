@@ -13,14 +13,10 @@ module Api
       end
 
       def create
-        @event = Event.new(event_params)
-        @event.created_by = current_user
+        event = Event.new(event_params.merge(created_by_id: current_user.id))
         if @event.save
-          @event.group = Group.find_by(params[:group_id])
-          @event.users << current_user
-          @event.grab_invite(current_user).make_admin
-          @event.grab_invite(current_user).make_confirm
-          render json: { success: true }, status: :ok
+          current_user.event_invites.create(event_id: event.id, is_admin: true, is_confirmed: true)
+          head :ok
         else
           render json: {success: false}, status: :unprocessable_entity
         end

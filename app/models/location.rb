@@ -17,7 +17,7 @@ class Location < ActiveRecord::Base
 
   set_rgeo_factory_for_column(:lonlat, RGeo::Geographic.spherical_factory(srid: 4326))
 
-  scope :find_in_radius, -> (location = nil, radius_in_meters = 10) { where{st_dwithin(lonlat, location.lonlat, radius_in_meters) } }
+  scope :find_in_radius, -> (location = nil, radius_in_meters = 10) {where{st_dwithin(lonlat, location.lonlat, radius_in_meters)}}
 
   private
   def update_lonlat

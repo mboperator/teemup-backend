@@ -28,11 +28,4 @@ class Event < ActiveRecord::Base
   has_many :admin_invites, -> { merge(EventInvite.admins) }, class_name: 'EventInvite'
   has_many :admin_users, through: :admin_invites, source: :user
 
-  def grab_invite(user)
-    event_invites.find_by(user: user)
-  end
-
-  def check_admin(user)
-    admin_invites.exists?(user: user)
-  end
 end
