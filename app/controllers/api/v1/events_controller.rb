@@ -13,8 +13,12 @@ module Api
       end
 
       def create
-        event = Event.new(event_params.merge(created_by_id: current_user.id))
-        if @event.save
+        loc = Location.find_or_create_by(location_params)
+        event = Event.new(event_params
+                          .merge(created_by_id: current_user.id)
+                          .merge(location_id: loc.id)
+                          .merge(group_id: current_group.id))
+        if event.save
           current_user.event_invites.create(event_id: event.id, is_admin: true, is_confirmed: true)
           head :ok
         else
@@ -33,7 +37,6 @@ module Api
 
       end
 
-      # DELETE /group/:group_id/events/:id.json
       def destroy
         @event = Event.find_by(params[:id])
         @event.destroy
@@ -44,7 +47,13 @@ module Api
       private
       def event_params
         params.require(:event)
-              .permit(:name, :subtitle, :creator, :start_time, :duration, :location => [:lat, :lon ])
+              .permit(:name, :subtitle, :creator, :start_time, :duration)
+
+      end
+
+      def location_params
+        params.require(:location)
+              .permit(:lat, :lon)
       end
 
     end
