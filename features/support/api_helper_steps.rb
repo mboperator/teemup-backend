@@ -1,7 +1,5 @@
 Given(/^a registered api user$/) do
   @user = FactoryGirl.create(:user, id: 1)
-  @project = FactoryGirl.create(:api_project, created_by: @user)
-  @membership = @user.memberships.create(project: @project)
 end
 
 When(/^they POST to "(.*?)"$/) do |url|

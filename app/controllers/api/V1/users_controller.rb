@@ -16,7 +16,7 @@ module Api
 
       def update
         if current_user.update_attributes(user_params)
-          render json: { success: true }, status: :updated
+          render json: { success: true }, status: :accepted
         else
           render json: { success: false }, status: :bad_request
         end
