@@ -11,11 +11,13 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  password_digest :string(255)
+#  location_id     :integer
 #
 
 class User < ActiveRecord::Base
   has_secure_password
 
+  belongs_to :location
   has_many :api_keys
 
   has_many :confirmed_memberships, -> { merge(GroupMembership.confirmed) }, class_name: 'GroupMembership'

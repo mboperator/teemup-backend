@@ -13,14 +13,14 @@ module Api
       end
 
       def create
-        @event = Event.new(event_params)
-        @event.created_by = current_user
-        if @event.save
-          @event.group = Group.find_by(params[:group_id])
-          @event.users << current_user
-          @event.grab_invite.make_admin
-          @event.grab_invite.make_confirm
-          respond_with @event
+        loc = Location.find_or_create_by(location_params)
+        event = Event.new(event_params
+                          .merge(created_by_id: current_user.id)
+                          .merge(location_id: loc.id)
+                          .merge(group_id: current_group.id))
+        if event.save
+          current_user.event_invites.create(event_id: event.id, is_admin: true, is_confirmed: true)
+          head :ok
         else
           render json: {success: false}, status: :unprocessable_entity
         end
@@ -37,7 +37,6 @@ module Api
 
       end
 
-      # DELETE /group/:group_id/events/:id.json
       def destroy
         @event = Event.find_by(params[:id])
         @event.destroy
@@ -47,7 +46,14 @@ module Api
 
       private
       def event_params
-        params.require(:event).permit(:name, :subtitle, :creator, :location => [:lat, :lon ])
+        params.require(:event)
+              .permit(:name, :subtitle, :creator, :start_time, :duration)
+
+      end
+
+      def location_params
+        params.require(:location)
+              .permit(:lat, :lon)
       end
 
     end
