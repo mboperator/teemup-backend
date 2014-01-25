@@ -29,3 +29,6 @@
 .idea/runConfigurations/Production__teemup_backend.xml
 .idea/runConfigurations/spec__teemup_backend.xml
 .idea/runConfigurations/test__teemup_backend.xml
+
+# Ignore simplecov
+/coverage/*
