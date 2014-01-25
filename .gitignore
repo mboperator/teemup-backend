@@ -32,3 +32,7 @@
 
 # Ignore simplecov
 /coverage/*
+
+# Ignore os x files
+.DS_Store
+._.DS_Store
