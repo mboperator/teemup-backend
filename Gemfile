@@ -40,6 +40,7 @@ group :test do
   gem 'json_spec'
   gem 'spring-commands-rspec'
   gem 'spring-commands-cucumber'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
