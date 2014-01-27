@@ -17,12 +17,10 @@
 development:
   adapter: postgis
   encoding: unicode
-  database: teemup
+  database: teemup_development
   pool: 5
-  username: teemup_db
-  password: t33mup
-  su_username: teemup_db_creator
-  su_password: t33mupcreator
+  username: teemup
+  password: t33mu9!
   schema_search_path: "public,postgis"
 
 test: &test
