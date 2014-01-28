@@ -7,7 +7,7 @@ module Api
       end
 
       def create
-        friendship = Friendship.new(friendship_params.merge(user_id: current_user.id))
+        friendship = Friendship.new(user_id: current_user.id, friend_id: User.find_by(friendship_params).id)
         if friendship.save
           head :ok
         else
@@ -16,7 +16,7 @@ module Api
       end
 
       def update
-        @friendship = Friendship.find_by(id: params[:id])
+        @friendship = Friendship.find_by(friend_id: params[:id])
         if @friendship.update_attributes(friendship_params)
           render json: {success: true}, status: :accepted
         else
@@ -25,15 +25,13 @@ module Api
       end
 
       def destroy
-        Friendship.find_by(id: params[:id]).destroy
+        Friendship.find_by(friend_id: params[:id]).destroy
         render json: { success: true }, status: :accepted
       end
 
       private
       def friendship_params
-        params
-          .require(:friendship)
-          .permit(:friend_id, :is_confirmed)
+        params.permit(:phone_number, :is_confirmed)
       end
 
     end
