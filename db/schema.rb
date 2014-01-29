@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 20140126105339) do
   end
 
   create_table "friendships", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.boolean  "is_confirmed"
+    t.integer  "user_id",                      null: false
+    t.integer  "friend_id",                    null: false
+    t.boolean  "is_confirmed", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
