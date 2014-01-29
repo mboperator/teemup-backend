@@ -8,7 +8,7 @@ module Api
       def create
         user = User.new(user_params)
         if user.save
-          render json: { apikey: user.api_keys.first.access_token, user_id: user.id, success: true }, status: :created
+          render json: { access_token: user.api_keys.first.access_token, user_id: user.id, success: true }, status: :created
         else
           render json: { errors: user.errors, success: false },  status: :bad_request
         end
