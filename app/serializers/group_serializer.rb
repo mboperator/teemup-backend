@@ -1,5 +1,9 @@
 class GroupSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :created_by , :members
+  attributes :id, :name, :description
+  has_many :users
+  has_many :admins
+  has_one :created_by
+
   def description
     "#{object.description}"
   end
@@ -7,17 +11,4 @@ class GroupSerializer < ActiveModel::Serializer
   def name
     "#{object.name}"
   end
-
-  def created_by
-    User.find(object.created_by_id).full_name
-  end
-
-  def members
-    object.users
-  end
-
-  def admins
-
-  end
-
 end
