@@ -16,7 +16,7 @@ module Api
       end
 
       def update
-        @friendship = Friendship.find_by(friend_id: params[:id])
+        @friendship = Friendship.find_by(user_id: params[:id], friend_id: current_user.id)
         if @friendship.update_attributes(friendship_params)
           render json: {success: true}, status: :accepted
         else
@@ -25,13 +25,17 @@ module Api
       end
 
       def destroy
-        Friendship.find_by(friend_id: params[:id]).destroy
+        if f = Friendship.find_by(user_id: current_user.id, friend_id: params[:id])
+          f.destroy
+        else
+          Friendship.find_by(friend_id: current_user.id, user_id: params[:id]).destroy
+        end
         render json: { success: true }, status: :accepted
       end
 
       private
       def friendship_params
-        params.permit(:phone_number, :is_confirmed)
+        params.permit(:phone_number, :email, :is_confirmed)
       end
 
     end
