@@ -30,6 +30,17 @@ class User < ActiveRecord::Base
   has_many :confirmed_event_invites, -> { merge(EventInvite.confirmed) }, class_name: 'EventInvite'
   has_many :confirmed_events, through: :confirmed_event_invites, source: :event
 
+  has_many :confirmed_friendships, -> { merge(Friendship.confirmed) }, class_name: 'Friendship'
+  has_many :confirmed_friends, through: :confirmed_friendships, source: :friend, class_name: 'User'
+  has_many :unconfirmed_friendships, -> { merge(Friendships.unconfirmed) }, class_name: 'Friendship'
+  has_many :unconfirmed_friends, through: :unconfirmed_friendships, source: :friend, class_name: 'User'
+
+  has_many :confirmed_inverse_friendships, -> { merge(Friendship.confirmed) }, foreign_key: 'friend_id', class_name: 'Friendship'
+  has_many :confirmed_inverse_friends, through: :confirmed_inverse_friendships, source: :user, class_name: 'User'
+  has_many :unconfirmed_inverse_friendships, -> { merge(Friendships.unconfirmed) }, foreign_key: 'friend_id', class_name: 'Friendship'
+  has_many :unconfirmed_inverse_friends, through: :unconfirmed_inverse_friendships, source: :user, class_name: 'User'
+
+
   validates :email, presence: true, uniqueness: true, format: /\A*.+@.+\z/
   validates :password, presence: true, length: { minimum: 6 }, if: :password
 
@@ -38,6 +49,10 @@ class User < ActiveRecord::Base
 
   def full_name
     [first_name, last_name].join(' ').presence || email
+  end
+
+  def friends
+    confirmed_friends + confirmed_inverse_friends
   end
 
   private
