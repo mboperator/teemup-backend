@@ -7,12 +7,12 @@ module Api
       respond_to :json
 
       def create
-        user = User.find_by(email: params[:user][:email].downcase)
-        if user && user.authenticate(params[:user][:password])
+        user = User.find_by(email: user_params[:email].downcase)
+        if user && user.authenticate(user_params[:password])
           set_user(user)
-          render json: { apikey: user.api_keys.first.access_token, user_id: user.id, success: true }, status: :created
+          render json: { apikey: user.api_keys.first.access_token, user_id: user.id, success: true }, status: :accepted
         else
-          render json: { errors: user.errors, success: false },  status: :bad_request
+          render json: { success: false },  status: :bad_request
         end
       end
       
