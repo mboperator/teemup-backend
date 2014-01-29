@@ -3,9 +3,7 @@ module Api
     class GroupsController < ApiController
 
       def index
-        @user = current_user
-        @groups = current_user.groups
-        respond_with @groups
+        respond_with current_user.groups
       end
 
       def show
