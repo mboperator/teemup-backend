@@ -3,6 +3,7 @@ class GroupSerializer < ActiveModel::Serializer
   has_many :users
   has_many :admins
   has_one :created_by
+  has_many :events
 
   def description
     "#{object.description}"
