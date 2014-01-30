@@ -1,12 +1,5 @@
 class LocationSerializer < ActiveModel::Serializer
-  attributes :id, :lat, :lon, :events, :users
-
-  def events
-    object.events
-  end
-
-  def users
-    object.users
-  end
-
+  attributes :id, :lat, :lon
+  has_many :events
+  has_many :users
 end
