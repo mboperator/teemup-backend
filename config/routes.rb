@@ -1,6 +1,15 @@
 require 'api_constraints'
 
 Teemup::Application.routes.draw do
+
+  root 'sessions#new'
+  match '/signup',   to: 'users#new',        via: 'get'
+  match '/signin',   to: 'sessions#new',     via: 'get'
+  match '/signout',  to: 'sessions#destroy', via: ['get', 'delete']
+
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create]
+
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       resources :sessions, only: [:create]

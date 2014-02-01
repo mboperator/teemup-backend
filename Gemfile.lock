@@ -37,6 +37,8 @@ GEM
     atomic (1.1.14)
     awesome_print (1.2.0)
     bcrypt-ruby (3.1.2)
+    bootstrap-sass (2.3.2.0)
+      sass (~> 3.2)
     builder (3.1.4)
     byebug (2.5.0)
       columnize (~> 0.3.6)
@@ -283,6 +285,7 @@ DEPENDENCIES
   annotate
   awesome_print
   bcrypt-ruby (~> 3.1.2)
+  bootstrap-sass (= 2.3.2.0)
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   cucumber (= 1.2.5)

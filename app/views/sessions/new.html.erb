@@ -1,0 +1,18 @@
+<section class="sign-in">
+  <div class="padded">
+    <section class="sign-up-form">
+      <%= form_for :session, url: sessions_path do |f| %>
+        <%= f.text_field :email, class: 'sign-in-form span-row', placeholder: 'Email', autofocus: 'true' %>
+        <%= f.password_field :password, class: 'sign-in-form span-row', placeholder: 'Password', autocomplete: :off %>
+
+        <%= f.submit 'Sign In', class: 'btn-brand top-margin' %>
+
+        <div class="top-padded">
+          <span class="medium muted bold">Not a memeber yet?</span>
+          <%= link_to "Sign up", signup_path, class: "brand-link medium" %>
+        </div>
+
+      <% end %>
+    </section>
+  </div>
+</section>
