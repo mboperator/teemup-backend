@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def authorize
     if signed_in?
       @user = current_user
-      @group  = find_by(id: params[:project_id])
+      @group  = find_by(id: params[:group_id])
     else
       store_location
       redirect_to signout_path, notice: "Please sign in" and return
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   private
   def ensure_admin
-    redirect_to projects_path unless current_user.admin?(@project)
+    redirect_to users_path  unless current_user.admin?(@group)
   end
 
 end
