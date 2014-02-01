@@ -1,6 +1,5 @@
 <div class="row">
   <div class="span6 offset3">
-    <section class="sign-up-form">
       <%= form_for :session, url: sessions_path do |f| %>
         <%= f.text_field :email, class: 'sign-in-form span-row', placeholder: 'Email', autofocus: 'true' %>
         <%= f.password_field :password, class: 'sign-in-form span-row', placeholder: 'Password', autocomplete: :off %>
@@ -13,7 +12,6 @@
         </div>
 
       <% end %>
-    </section>
   </div>
 </div>
 
