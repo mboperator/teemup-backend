@@ -9,7 +9,7 @@ module Api
       def show
         @group = Group.find_by(id: params[:id])
         if current_user.groups.include?(@group)
-          respond_with @group
+          respond_with @group, serializer: GroupDetailSerializer
         else
           render json: { success: false }, status: :unauthorized
         end
