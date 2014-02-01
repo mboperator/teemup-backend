@@ -8,6 +8,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    if @user.save
+      sign_in @user
+      redirect_to users_path
+    else
+      render "new", layout: "account"
+    end
+  end
+
+  def index
+    @users = User.all
   end
 
   private

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   skip_before_filter :authorize, :enforce_plan_pricewalls
 
   def new
-    redirect_to projects_path if signed_in?
+    redirect_to users_path if signed_in?
   end
 
   def create
