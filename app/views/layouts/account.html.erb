@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TeemUp</title>
+    <%= render "layouts/header" %>
+  </head>
+  <body>
+    <% flash.each do |key, value| %>
+        <section class="alerts no-margin <%= "alert-#{key}" %>">
+          <%= value %>
+          <div class="pull-right">
+            <a href="#" class="unstyled" data-dismiss="alert"></a>
+          </div>
+        </section>
+      <% end %>
+    <section class="account-layout">
+      <%= yield %>
+    </section>
+
+    <%# render "layouts/footer" %>
+  </body>
+</html>
+

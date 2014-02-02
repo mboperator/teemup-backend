@@ -47,6 +47,14 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   after_save :create_access_token
 
+  def self.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def self.new_remember_token
+    SecureRandom.urlsafe_base64.to_s
+  end
+
   def full_name
     [first_name, last_name].join(' ').presence || email
   end
@@ -60,4 +68,8 @@ class User < ActiveRecord::Base
     self.api_keys.create!
   end
 
+  def create_remember_token
+    self.remember_token = User.encrypt(User.new_remember_token)
+  end
 end
+
