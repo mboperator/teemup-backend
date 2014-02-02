@@ -1,9 +1,14 @@
 module Api
   module V1
     class GroupsController < ApiController
+      skip_before_filter :api_authorize, only: :index
 
       def index
-        respond_with current_user.groups
+        if current_user.nil?
+          respond_with Group.all
+        else
+          respond_with current_user.groups
+        end
       end
 
       def show
