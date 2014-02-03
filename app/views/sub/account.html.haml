@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title TeemUp
+    = render "layouts/header"
+  %body
+    - flash.each do |key, value|
+      %section{:class => "alerts no-margin #{"alert-#{key}"}"}
+        = value
+        .pull-right
+          %a.unstyled{"data-dismiss" => "alert", :href => "#"}
+    %section.account-layout
+      = yield

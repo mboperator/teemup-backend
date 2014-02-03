@@ -1,0 +1,24 @@
+= form_for [@group, @event] do |e|
+  .fields
+    = e.label :name
+    = e.text_field :name
+
+    = e.label :description
+    = e.text_field :description
+
+    = e.label :start_time
+    = e.datetime_select :start_time
+
+    = e.label :duration
+    = e.number_field :duration
+
+    = e.hidden_field :created_by_id, value: current_user.id
+    = e.hidden_field :group_id, value: @group.id
+
+    = e.label 'Latitude'
+    = number_field :location, :lat
+    = e.label 'Longitude'
+    = number_field :location, :lon
+
+  .actions
+    = e.submit 'Save'

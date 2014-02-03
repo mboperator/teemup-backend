@@ -1,0 +1,7 @@
+%h4 Event Listing
+- @events.each do |ev|
+  = ev.name
+
+= link_to 'New Event', new_group_event_url
+\|
+= link_to 'Back', group_path(@group)

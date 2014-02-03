@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
 
   has_many :confirmed_memberships, -> { merge(GroupMembership.confirmed) }, class_name: 'GroupMembership'
   has_many :confirmed_groups, through: :confirmed_memberships, source: :group
+  has_many :admin_groups, through: :admin_memberships, source: :group
+  has_many :admin_memberships, -> { merge(GroupMembership.admins)}, class_name: 'GroupMembership'
   has_many :groups, through: :group_memberships
   has_many :group_memberships
 

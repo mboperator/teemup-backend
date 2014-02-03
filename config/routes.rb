@@ -9,6 +9,9 @@ Teemup::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
+  resources :groups do
+    resources :events
+  end
 
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do

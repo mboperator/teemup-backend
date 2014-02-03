@@ -1,0 +1,16 @@
+.text-center
+  - if @user
+    %h4= "Welcome back, #{@user.first_name}"
+    %ul.nav.nav-tabs
+      - @user.groups.each do |g|
+
+        - if @group and g.id == @group.id
+          %li.active= link_to "#{g.name}", group_path(g)
+        - else
+          %li= link_to "#{g.name}", group_path(g)
+
+      - if @group and @group.name.blank?
+        %li.active=link_to "+", new_group_path
+      - else
+        %li=link_to "+", new_group_path
+

@@ -18,4 +18,6 @@ class Group < ActiveRecord::Base
   has_many :users, through: :group_memberships
   belongs_to :created_by, class_name: "User"
 
+  accepts_nested_attributes_for :group_memberships
+
 end

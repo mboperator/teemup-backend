@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %title TeemUp
+    %link{:href => "//fonts.googleapis.com/css?family=Open+Sans:400,600,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css", :rel => "stylesheet"}/
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    = render 'sub/header'
+    .container.span12.offset0
+      .row.offset1.span10
+        - flash.each do |key, value|
+          %div{:class => "alert alert-#{key}"}= value
+        = render 'sub/sidebar'
+      .row.offset1.span10
+        - if @group.id and not @event
+          = render 'groups/detail'
+        = yield
+      = render 'sub/footer'
