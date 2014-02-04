@@ -15,7 +15,7 @@
           %div{:class => "alert alert-#{key}"}= value
         = render 'sub/sidebar'
       .row.offset1.span10
-        - if @group.id and not @event
+        - if @group and @group.id and not @event
           = render 'groups/detail'
         = yield
       = render 'sub/footer'
