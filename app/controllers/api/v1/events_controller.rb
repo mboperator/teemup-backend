@@ -2,6 +2,7 @@ module Api
   module V1
     class EventsController < ApiController
       respond_to :json
+      skip_before_filter :api_authorize, only: [:index, :show]
 
       def index
         @group = Group.find_by(id: params[:group_id])
