@@ -1,0 +1,70 @@
+body{	
+	font-family: 'Lato', sans-serif;
+}
+
+#intro { 
+	background: url(../images/back-5.jpg) 50% 0 fixed; 
+	height: auto;  
+	margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 25% 0 40% 0;
+    -webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+}
+#home { 
+    background: url(../images/mapbox.jpg) center center fixed; 
+	background-color: rgba(255,255,255);
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: auto;  
+	margin: 0 auto;
+    width: 100%; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 17% 0;
+	color: rgb(255,255,255);
+}
+
+#about { 
+	background: url(../images/back-2.jpg) 50% 0 fixed; 
+	height: auto;
+	margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 15% 0;
+    color: #fff;
+}
+
+.banner{
+	top: 10%;
+
+	font-style: normal;
+	display: inline;
+}
+
+.banner h1{
+		font-size: 48pt;
+
+}
+
+.well{
+	background-color: rgba(0,0,0,0.8);
+}
+
+.em{
+	color: rgba(178,55,63,1);
+}
+.em0{
+	color: rgba(21,123,178,1);
+}
