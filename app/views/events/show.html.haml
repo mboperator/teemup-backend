@@ -1,0 +1,21 @@
+.well.text-center{style: "padding: 20px; height: 150px"}
+  .span4
+    %h2= @event.name
+    %table{style: "margin: 0 auto"}
+      %tr
+        %td
+          %i.text-warning= "#{@event.start_time.strftime("%b %d %Y")}"
+          %i.text-success= "|| #{@event.start_time.strftime("%-l:%M%P")}"
+          %i.text-error= "- #{@event.end_time.strftime("%-l:%M%P")}"
+      %tr
+        %td
+          %i= "Duration: #{distance_of_time_in_words(@event.duration)}"
+      %tr
+        %td
+          %i= "Created by: #{@event.created_by.full_name}"
+      %tr
+        %td
+          %button.btn.btn-mini.btn-info= link_to "Edit", edit_group_event_path(@group, @event)
+          %button.btn.btn-mini.btn-warning= link_to "Destroy", group_event_path(@group, @event), method: 'delete'
+  .span4
+    %p= @event.description

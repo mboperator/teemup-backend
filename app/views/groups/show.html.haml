@@ -1,0 +1,12 @@
+%section.offset2
+  .div
+    %h4 Events
+    %button{class: 'btn-small btn-action'}= link_to 'Add Event', new_group_event_path(@group)
+  %br
+  - @group.events.each do |ev|
+    .well.span1
+      = link_to ev.name, group_event_path(@group, ev)
+
+
+
+

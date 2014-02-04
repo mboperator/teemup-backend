@@ -1,0 +1,11 @@
+.row.pull-left.span2
+  #details
+    %h4 Description
+    = @group.description
+    %h4 Admins
+    - @group.admins.each do |ad|
+      =ad.full_name
+    %br
+    %button{class: 'btn btn-mini btn-detail'}= link_to 'Edit', edit_group_path(@group)
+    %button{class: 'btn btn-mini btn-warning'}= link_to 'Destroy', group_path(@group), method: 'delete', confirm: "Are you sure you'd like to delete the group #{@group.name}?"
+

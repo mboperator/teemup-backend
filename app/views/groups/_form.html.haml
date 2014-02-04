@@ -1,0 +1,12 @@
+= form_for @group do |g|
+  .fields
+    = g.label :name
+    = g.text_field :name
+
+    = g.label :description
+    = g.text_area :description
+
+    = g.hidden_field :created_by_id, value: current_user.id
+
+  .actions
+    = g.submit 'Save'
