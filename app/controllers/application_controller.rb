@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   def authorize
     if signed_in?
       @user = current_user
+      @group = Group.find(params[:group_id]) if params[:group_id]
     else
       store_location
       redirect_to signout_path, notice: "Please sign in" and return
