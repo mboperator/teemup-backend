@@ -9,7 +9,7 @@ module Api
       end
 
       def show
-        respond_with Event.find_by(id: params[:id])
+        respond_with Event.find_by(id: params[:id]), serializer: EventDetailSerializer
       end
 
       def create

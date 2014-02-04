@@ -1,4 +1,7 @@
 class EventDetailSerializer < EventSerializer
-  has_many :confirmed_users
-  has_many :admin_users
+  attributes :created_by
+
+  def created_by
+    object.created_by.full_name
+  end
 end

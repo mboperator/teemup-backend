@@ -1,7 +1,7 @@
 module Api
   module V1
     class GroupsController < ApiController
-      skip_before_filter :api_authorize, only: :index
+      skip_before_filter :api_authorize, only: [:index, :show]
 
       def index
         if current_user.nil?
@@ -13,11 +13,7 @@ module Api
 
       def show
         @group = Group.find_by(id: params[:id])
-        if current_user.groups.include?(@group)
-          respond_with @group, serializer: GroupDetailSerializer
-        else
-          render json: { success: false }, status: :unauthorized
-        end
+        respond_with @group, serializer: GroupDetailSerializer
       end
 
       def create
