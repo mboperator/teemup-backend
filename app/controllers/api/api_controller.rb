@@ -1,4 +1,4 @@
-class Api::ApiController < ApplicationController
+class Api::ApiController < ActionController::Base 
   before_filter :api_authorize
   skip_before_filter :verify_authenticity_token
   include ApiHelper
