@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+
   def index
   end
 
@@ -40,6 +41,5 @@ class GroupsController < ApplicationController
     params.require(:group)
           .permit(:name, :description, :created_by_id)
   end
-
-
 end
+

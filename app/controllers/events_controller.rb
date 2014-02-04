@@ -1,9 +1,4 @@
 class EventsController < ApplicationController
-  before_filter :grab_group
-
-  def grab_group
-    @group = Group.find_by(id: params[:group_id])
-  end
 
   def index
     @events = @group.events
@@ -48,3 +43,4 @@ class EventsController < ApplicationController
           .permit(:name, :description, :created_by_id, :group_id, :start_time, :duration, location: [:lat, :lon])
   end
 end
+
