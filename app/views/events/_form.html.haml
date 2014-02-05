@@ -16,9 +16,9 @@
     = e.hidden_field :group_id, value: @group.id
 
     = e.label 'Latitude'
-    = number_field :location, :lat
+    = number_field :location, :lat, step: 'any'
     = e.label 'Longitude'
-    = number_field :location, :lon
+    = number_field :location, :lon, step: 'any'
 
   .actions
     = e.submit 'Save'
