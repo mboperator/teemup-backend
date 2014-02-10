@@ -3,35 +3,35 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-gem 'haml-rails'
-gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'active_model_serializers'
+gem 'activerecord-postgis-adapter'
 gem 'awesome_print'
+gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'haml-rails'
+gem 'jbuilder', '~> 1.2'
+gem 'jquery-rails'
+gem 'pg'
+gem 'sass-rails', '~> 4.0.0'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
-gem 'pg'
-gem 'activerecord-postgis-adapter'
 gem 'squeel'
-gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass', '2.3.2.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
+gem 'uglifier', '>= 1.3.0'
 
 group :development do
   gem 'annotate'
+  gem 'foreman'
   gem 'git_remote_branch'
-  gem 'quiet_assets'
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.1.0'
-  gem 'foreman'
+  gem 'quiet_assets'
 end
 
 group :test do
-  gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate-test-reporter', require: nil
   gem 'cucumber', '1.2.5'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
@@ -40,15 +40,15 @@ group :test do
   gem 'guard-rspec'
   gem 'guard-spring'
   gem 'json_spec'
-  gem 'spring-commands-rspec'
-  gem 'spring-commands-cucumber'
   gem 'simplecov', require: false
+  gem 'spring-commands-cucumber'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
   gem 'pry'
-  gem 'pry-remote'
   gem 'pry-byebug'
+  gem 'pry-remote'
   gem 'rspec-rails'
   gem 'spring'
 end
@@ -61,4 +61,4 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# ruby "2.1.0"
+ruby '2.1.0'
