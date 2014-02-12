@@ -5,9 +5,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new
-    @event.build_location
-    if @event.update_attributes(event_params)
+    loc = Location.find_or_create_by(location_params)
+    @event = Event.new(event_params
+                      .merge(created_by_id: current_user.id)
+                      .merge(location_id: loc.id)
+                      .merge(group_id: current_group.id))
+    binding.pry
+    if @event.save
       redirect_to group_url(@group.id), notice: 'Event was successfully created.'
     end
   end
@@ -22,7 +26,9 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find_by(id: params[:id])
-    if @event.update_attributes(event_params)
+    loc = Location.find_or_create_by(location_params) if location_params
+    if @event.update_attributes(event_params
+                                .merge(location_id: loc.id))
       redirect_to [@group, @event] , notice: 'Event was successfully updated.'
     end
   end
@@ -40,7 +46,13 @@ class EventsController < ApplicationController
   private
   def event_params
     params.require(:event)
-          .permit(:name, :description, :created_by_id, :group_id, :start_time, :duration, location: [:lat, :lon])
+    .permit(:name, :subtitle, :creator, :start_time, :duration)
+
+  end
+
+  def location_params
+    params.require(:location)
+    .permit(:lat, :lon)
   end
 end
 
