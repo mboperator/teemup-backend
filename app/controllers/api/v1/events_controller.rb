@@ -28,8 +28,8 @@ module Api
       end
 
       def update
-        @event = Event.find_by(params[:id])
-
+        @event = Event.find_by(id: params[:id])
+        Location.find_by(id: @event.location_id).update_attributes(location_params) if location_params
         if @event.update_attributes(event_params)
           respond_with @event
         else
