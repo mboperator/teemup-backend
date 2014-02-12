@@ -10,7 +10,6 @@ class EventsController < ApplicationController
                       .merge(created_by_id: current_user.id)
                       .merge(location_id: loc.id)
                       .merge(group_id: current_group.id))
-    binding.pry
     if @event.save
       redirect_to group_url(@group.id), notice: 'Event was successfully created.'
     end
