@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
+//= require jquery.ui.all
+//= require jquery.ui.addresspicker
+//= require jquery-ui-timepicker-addon.min
+//= require jquery-ui-sliderAccess
 //= require_tree .

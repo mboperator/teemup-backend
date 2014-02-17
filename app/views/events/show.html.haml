@@ -1,4 +1,26 @@
-.well.text-center{style: "padding: 20px; height: 150px"}
+:javascript
+  function initialize() {
+    var latLng = new google.maps.LatLng(#{@event.location.lat}, #{@event.location.lon});
+    var mapOptions = {
+      center: latLng,
+      zoom: 12
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+    var marker = new google.maps.Marker({
+          position: latLng,
+          map: map,
+          title:"#{@event.name}"
+      });
+  }
+
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+.row.text-center
+  #map-canvas{style: "width: 100%; height: 200px;"}
+
+.row.well.text-center
   .span4
     %h2= @event.name
     %table{style: "margin: 0 auto"}
@@ -17,5 +39,5 @@
         %td
           %button.btn.btn-mini.btn-info= link_to "Edit", edit_group_event_path(@group, @event)
           %button.btn.btn-mini.btn-warning= link_to "Destroy", group_event_path(@group, @event), method: 'delete'
-  .span4
+  .span5{style: "height:150px; overflow-y: auto;"}
     %p= @event.description

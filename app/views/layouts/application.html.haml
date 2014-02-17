@@ -4,10 +4,10 @@
     %title TeemUp
     %link{href: "//fonts.googleapis.com/css?family=Open+Sans:400,600,700", rel: "stylesheet", type: "text/css"}/
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css", rel: "stylesheet"}/
+    %script{src:"https://maps.googleapis.com/maps/api/js?key=AIzaSyAnWXqW45Alv09ChTXIN_SZUN5A2TC9wiY&sensor=true"}
+
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
-    %link{href: "//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css", rel: "stylesheet", type: "text/css"}/
-    %script{src: "//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js"}
     = csrf_meta_tags
   %body
     = render 'sub/header'
