@@ -20,6 +20,7 @@ gem 'slim'
 gem 'squeel'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
+gem 'jquery-ui-rails'
 
 group :development do
   gem 'annotate'

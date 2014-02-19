@@ -1,24 +1,89 @@
-= form_for [@group, @event] do |e|
-  .fields
-    = e.label :name
-    = e.text_field :name
+:javascript
+  $(function() {
+    var addresspicker = $( "#addresspicker" ).addresspicker({
+      componentsFilter: 'country:US'
+    });
+    var addresspickerMap = $( "#addresspicker_map" ).addresspicker({
+      regionBias: "us",
+      updateCallback: showCallback,
+      reverseGeocode: true,
+      mapOptions: {
+        zoom: 14,
+        center: new google.maps.LatLng(34.4155193, -119.8511707),
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      },
+      elements: {
+        map:      "#map",
+        lat:      "#lat",
+        lng:      "#lng",
+        street_number: '#street_number',
+        route: '#route',
+        locality: '#locality',
+        administrative_area_level_2: '#administrative_area_level_2',
+        administrative_area_level_1: '#administrative_area_level_1',
+        country:  '#country',
+        postal_code: '#postal_code',
+        type:    '#type'
+      }
+    });
 
-    = e.label :description
-    = e.text_area :description
+    var gmarker = addresspickerMap.addresspicker( "marker");
+    gmarker.setVisible(true);
+    addresspickerMap.addresspicker( "updatePosition");
 
-    = e.label :start_time
-    = e.datetime_select :start_time
+    function showCallback(geocodeResult, parsedGeocodeResult){
+      $('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
+    }
+    // Update zoom field
+    var map = $("#addresspicker_map").addresspicker("map");
+    google.maps.event.addListener(map, 'idle', function(){
+      $('#zoom').val(map.getZoom());
+    });
 
-    = e.label :duration
-    = e.number_field :duration
+    $('#event_start_time').datetimepicker({
+                                           dateFormat: 'yy-mm-dd',
+                                           timeFormat: 'HH:mm:ss'
+                                         });
+  });
+%row
+  .text-center.well
+    .map-wrapper
+      #map{style: "height:300px; width:100%;"}
+      #legend You can drag and drop the marker to the correct location
+%row
+  .span4.pull-left
+    = form_for [@group, @event] do |e|
+      .fields
 
-    = e.hidden_field :created_by_id, value: current_user.id
-    = e.hidden_field :group_id, value: @group.id
+        = e.label 'Address'
+        %input#addresspicker_map
 
-    = e.label 'Latitude'
-    = number_field :location, :lat, step: 'any'
-    = e.label 'Longitude'
-    = number_field :location, :lon, step: 'any'
+        = e.label :name
+        = e.text_field :name
 
-  .actions
-    = e.submit 'Save'
+        = e.label :description
+        = e.text_area :description
+
+        = e.label :start_time
+        = e.text_field :start_time
+
+        = e.label :duration
+        = e.number_field :duration
+
+        = e.hidden_field :created_by_id, value: current_user.id
+        = e.hidden_field :group_id, value: @group.id
+
+
+        = hidden_field :location, :lat, id: "lat"
+        = hidden_field :location, :lon, id: "lng"
+
+
+      .actions
+        = e.submit 'Save'
+
+  .pull-right.span4
+    .input-positioned
+      %label Callback:
+      %textarea#callback_result{rows: "15"}
+    / End demo
