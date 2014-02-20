@@ -9,6 +9,7 @@ Teemup::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
+  resources :events, only: [:index, :show]
   resources :groups do
     resources :events
   end

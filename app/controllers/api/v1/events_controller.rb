@@ -5,8 +5,13 @@ module Api
       skip_before_filter :api_authorize, only: [:index, :show]
 
       def index
-        @group = Group.find_by(id: params[:group_id])
-        respond_with @group.events
+        if params[:group_id]
+          @group = Group.find_by(id: params[:group_id])
+          respond_with @group.events.where("start_time > ?", Time.now).order(:start_time)
+        else
+          respond_with Event.where("start_time > ?", Time.now).order(:start_time)
+        end
+
       end
 
       def show
