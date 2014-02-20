@@ -16,6 +16,7 @@ Teemup::Application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      resources :events, only: [:index, :show]
       resources :sessions, only: [:create]
       resources :users, only: [:create, :show, :update]
       resources :friendships, only: [:create, :index, :update, :destroy]
