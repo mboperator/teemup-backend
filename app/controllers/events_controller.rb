@@ -1,7 +1,12 @@
 class EventsController < ApplicationController
 
   def index
-    @events = @group.events
+    if @group
+      @events = @group.events.where("start_time > ?", Time.now).order(:start_time)
+    else
+      @events = Event.where("start_time > ?", Time.now).order(:start_time)
+    end
+
   end
 
   def create
