@@ -43,7 +43,7 @@ GEM
     byebug (2.5.0)
       columnize (~> 0.3.6)
       debugger-linecache (~> 1.2.0)
-    capistrano (2.15.0)
+    capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -315,7 +315,7 @@ DEPENDENCIES
   awesome_print
   bcrypt-ruby (~> 3.1.2)
   bootstrap-sass (= 2.3.2.0)
-  capistrano (= 2.15)
+  capistrano (= 2.15.5)
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   cucumber (= 1.2.5)
