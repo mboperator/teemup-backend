@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20140204043950) do
   add_index "api_keys", ["user_id"], :name => "index_api_keys_on_user_id"
 
   create_table "event_invites", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.boolean  "is_admin"
-    t.boolean  "is_confirmed"
+    t.integer  "user_id",                      null: false
+    t.integer  "event_id",                     null: false
+    t.boolean  "is_admin",     default: false
+    t.boolean  "is_confirmed", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,5 +93,9 @@ ActiveRecord::Schema.define(version: 20140204043950) do
     t.string   "password_digest"
     t.integer  "location_id"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["phone_number"], :name => "index_users_on_phone_number", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token", :unique => true
 
 end
