@@ -16,12 +16,8 @@ body{
 		background-size: cover;
 }
 #home { 
-    background: url(../images/mapbox.png) center center fixed;
+    background: url(../images/mapbox.jpg) center center fixed;
 	background-color: rgba(255,255,255);
-    -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
 	height: auto;  
 	margin: 0 auto;
     width: 100%; 
