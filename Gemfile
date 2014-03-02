@@ -26,6 +26,8 @@ gem 'jquery-ui-rails'
 
 group :development do
   gem 'annotate'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'foreman'
   gem 'git_remote_branch'
   gem 'letter_opener'

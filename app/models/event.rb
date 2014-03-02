@@ -12,6 +12,7 @@
 #  duration      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  tag_id        :integer
 #
 
 class Event < ActiveRecord::Base
@@ -22,6 +23,7 @@ class Event < ActiveRecord::Base
 
   has_many :event_invites
   has_many :users, through: :event_invites
+  has_and_belongs_to_many :tags
 
   has_many :confirmed_event_invites, -> { merge(EventInvite.confirmed) }, class_name: 'EventInvite'
   has_many :confirmed_users, through: :confirmed_event_invites, source: :user
@@ -34,3 +36,4 @@ class Event < ActiveRecord::Base
   end
 
 end
+
