@@ -8,6 +8,7 @@
 #  created_by_id :integer          not null
 #  created_at    :datetime
 #  updated_at    :datetime
+#  is_public     :boolean          default(FALSE)
 #
 
 require 'spec_helper'

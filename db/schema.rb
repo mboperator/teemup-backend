@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204043950) do
+ActiveRecord::Schema.define(version: 20140302022710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(version: 20140204043950) do
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "events_tags", id: false, force: true do |t|
+    t.integer "event_id", null: false
+    t.integer "tag_id",   null: false
   end
 
   create_table "friendships", force: true do |t|
@@ -81,6 +86,12 @@ ActiveRecord::Schema.define(version: 20140204043950) do
   end
 
   add_index "locations", ["lonlat"], :name => "index_locations_on_lonlat", :spatial => true
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"

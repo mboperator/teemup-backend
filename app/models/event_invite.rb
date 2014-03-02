@@ -3,10 +3,10 @@
 # Table name: event_invites
 #
 #  id           :integer          not null, primary key
-#  user_id      :integer
-#  event_id     :integer
-#  is_admin     :boolean
-#  is_confirmed :boolean
+#  user_id      :integer          not null
+#  event_id     :integer          not null
+#  is_admin     :boolean          default(FALSE)
+#  is_confirmed :boolean          default(FALSE)
 #  created_at   :datetime
 #  updated_at   :datetime
 #
@@ -31,3 +31,4 @@ class EventInvite < ActiveRecord::Base
     update_attributes(is_admin: false)
   end
 end
+

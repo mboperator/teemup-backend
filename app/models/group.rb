@@ -8,6 +8,7 @@
 #  created_by_id :integer          not null
 #  created_at    :datetime
 #  updated_at    :datetime
+#  is_public     :boolean          default(FALSE)
 #
 
 class Group < ActiveRecord::Base
@@ -21,3 +22,4 @@ class Group < ActiveRecord::Base
   accepts_nested_attributes_for :group_memberships
 
 end
+
