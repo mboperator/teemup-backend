@@ -71,6 +71,8 @@
         = e.label :duration
         = e.number_field :duration
 
+        = e.file_field :picture
+
         = e.hidden_field :created_by_id, value: current_user.id
         = e.hidden_field :group_id, value: @group.id
 
