@@ -1,12 +1,19 @@
 = form_for @group do |g|
-  .fields
+  .fields.pull-left.span2
+    %h3 Edit Group
     = g.label :name
     = g.text_field :name
 
     = g.label :description
     = g.text_area :description
+  .span2.offset1
+    %h3 Admins
+    = g.collection_check_boxes(:admin_ids, User.all, :id, :full_name)
 
     = g.hidden_field :created_by_id, value: current_user.id
 
-  .actions
+  .row.actions
+    %h3 Actions
     = g.submit 'Save'
+    %button{class: 'btn btn-mini btn-warning'}= link_to 'Destroy', group_path(@group), method: 'delete', confirm: "Are you sure you'd like to delete the group #{@group.name}?"
+

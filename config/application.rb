@@ -21,5 +21,7 @@ module Teemup
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-  end
+    config.time_zone = 'Pacific Time (US & Canada)'
+    config.active_record.default_timezone = :local
+    end
 end

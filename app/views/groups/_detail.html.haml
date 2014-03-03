@@ -7,6 +7,5 @@
       =ad.full_name
     %br
     %button{class: 'btn btn-mini btn-detail'}= link_to 'Edit', edit_group_path(@group)
-    %button{class: 'btn btn-mini btn-warning'}= link_to 'Destroy', group_path(@group), method: 'delete', confirm: "Are you sure you'd like to delete the group #{@group.name}?"
-    %button{class: 'btn-small btn-action'}= link_to 'Create Event', new_group_event_path(@group)
+    %button{class: 'btn btn-mini btn-action'}= link_to 'Create Event', new_group_event_path(@group)
 

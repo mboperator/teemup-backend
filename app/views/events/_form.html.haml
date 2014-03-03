@@ -43,7 +43,7 @@
 
     $('#event_start_time').datetimepicker({
                                            dateFormat: 'yy-mm-dd',
-                                           timeFormat: 'HH:mm:ss'
+                                           timeFormat: 'HH:mm:ss z'
                                          });
   });
 %row
@@ -51,38 +51,44 @@
     .map-wrapper
       #map{style: "height:300px; width:100%;"}
       #legend You can drag and drop the marker to the correct location
-%row
-  .span4.pull-left
-    = form_for [@group, @event] do |e|
-      .fields
+%row.span10
+  = form_for [@group, @event] do |e|
+    .span2
+      %h4 Details
+      = e.label 'Address'
+      %input#addresspicker_map
 
-        = e.label 'Address'
-        %input#addresspicker_map
+      = e.label :name
+      = e.text_field :name
 
-        = e.label :name
-        = e.text_field :name
+      = e.label :location_name
+      = e.text_field :location_name
 
-        = e.label :description
-        = e.text_area :description
+      = e.label :description
+      = e.text_area :description
+    .span2.offset1
+      %h4 Date and Time
+      = e.label :start_time
+      = e.text_field :start_time
 
-        = e.label :start_time
-        = e.text_field :start_time
+      = label_tag :duration, "Duration Hours"
+      = e.number_field :duration, step: 0.25, value: @event.duration / 3600
 
-        = label_tag :duration, "Duration Hours"
-        = e.number_field :duration, :value => @event.duration / 3600
+    .span2.offset1
+      %h4 Upload Picture
+      = e.file_field :picture
 
-        = e.file_field :picture
-
-        = e.hidden_field :created_by_id, value: current_user.id
-        = e.hidden_field :group_id, value: @group.id
-
-
-        = hidden_field :location, :lat, id: "lat"
-        = hidden_field :location, :lon, id: "lng"
-
-        = e.collection_check_boxes(:tag_ids, Tag.all, :id, :name)
+      = e.hidden_field :created_by_id, value: current_user.id
+      = e.hidden_field :group_id, value: @group.id
 
 
-      .actions
-        = e.submit 'Save'
+      = hidden_field :location, :lat, id: "lat"
+      = hidden_field :location, :lon, id: "lng"
+
+      %h4 Tags
+      = e.collection_check_boxes(:tag_ids, Tag.all, :id, :name)
+
+
+    .actions.span2.offset1
+      = e.submit 'Save'
 
