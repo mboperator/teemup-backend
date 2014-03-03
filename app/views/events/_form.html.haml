@@ -71,6 +71,8 @@
         = label_tag :duration, "Duration Hours"
         = e.number_field :duration, :value => @event.duration / 3600
 
+        = e.file_field :picture
+
         = e.hidden_field :created_by_id, value: current_user.id
         = e.hidden_field :group_id, value: @group.id
 

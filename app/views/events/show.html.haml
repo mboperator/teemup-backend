@@ -41,3 +41,4 @@
           %button.btn.btn-mini.btn-warning= link_to "Destroy", group_event_path(@group, @event), method: 'delete'
   .span5{style: "height:150px; overflow-y: auto;"}
     %p= @event.description
+  %p= image_tag @event.picture.url(:medium)
