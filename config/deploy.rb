@@ -29,6 +29,7 @@ set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+# set :linked_dirs, %w{bin log public/system}
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '2.1.0'
@@ -45,22 +46,21 @@ set :keep_releases, 20
 namespace :deploy do
 
   desc 'Restart application'
+  task :setup_config do
+    on roles(:app), in: :sequence, wait: 5 do
+      sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/teemup-backend"
+      sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_teemup-backend"
+      puts "Now edit the config files in #{shared_path}."
+    end
+  end
+
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       %w[start stop restart].each do |command|
         # Your restart mechanism here, for example:
         # execute :touch, release_path.join('tmp/restart.txt')
-    desc "#{command} unicorn server"
-        run "/etc/init.d/unicorn_#{application} #{command}"
+        execute "/etc/init.d/unicorn_teemup-backend #{command}"
       end
-    end
-  end
-
-  task :setup_config do
-    on roles(:app), in: :sequence, wait: 5 do
-      sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-      sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-      puts "Now edit the config files in #{shared_path}."
     end
   end
 
