@@ -32,6 +32,9 @@
     gmarker.setVisible(true);
     addresspickerMap.addresspicker( "updatePosition");
 
+    function showCallback(geocodeResult, parsedGeocodeResult){
+      $('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
+    }
     // Update zoom field
     var map = $("#addresspicker_map").addresspicker("map");
     google.maps.event.addListener(map, 'idle', function(){
@@ -65,8 +68,8 @@
         = e.label :start_time
         = e.text_field :start_time
 
-        = e.label :duration
-        = e.number_field :duration
+        = label_tag :duration, "Duration Hours"
+        = e.number_field :duration, :value => @event.duration / 3600
 
         = e.hidden_field :created_by_id, value: current_user.id
         = e.hidden_field :group_id, value: @group.id
