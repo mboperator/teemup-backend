@@ -1,11 +1,29 @@
 %section.offset2
   .div
     %h4 Events
-    %button{class: 'btn-small btn-action'}= link_to 'Add Event', new_group_event_path(@group)
   %br
-  - @group.events.each do |ev|
-    .well.span1
-      = link_to ev.name, group_event_path(@group, ev)
+  %table.table
+    %tr
+      %th Date
+      %th Title
+      %th Tags
+      %th Start Time
+      %th Tasks
+    - @group.events.order(:start_time).each do |ev|
+
+      %tr
+        %td
+          = ev.start_time.strftime("%b %d %Y")
+        %td
+          = link_to ev.name, group_event_path(@group, ev)
+        %td
+          - ev.tags.each do |t|
+            = t.name
+        %td
+          = ev.start_time.strftime("%-l:%M%P")
+        %td
+          %button{class: 'btn btn-mini btn-detail'}= link_to 'Edit', edit_group_event_path(@group, ev)
+          %button{class: 'btn btn-mini btn-warning'}= link_to 'Destroy', group_event_path(@group, ev), method: 'delete', confirm: "Are you sure you'd like to delete the event #{ev.name}?"
 
 
 

@@ -22,6 +22,8 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    loc = Location.new(lat: 34.4155193, lon:-119.8511707)
+    @event.location = loc
   end
 
   def show
@@ -44,13 +46,13 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find_by(id: params[:id])
     @event.destroy
-    redirect_to group_events_url
+    redirect_to group_url(@group)
   end
 
   private
   def event_params
     params.require(:event)
-    .permit(:name, :subtitle, :creator, :start_time, :duration, :description)
+    .permit(:name, :subtitle, :created_by_id, :group_id, :start_time, :duration, :description, tag_ids: [])
 
   end
 
