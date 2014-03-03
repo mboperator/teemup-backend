@@ -62,6 +62,10 @@ GEM
       xpath (~> 2.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.3)
+      climate_control (>= 0.0.3, < 1.0)
     codeclimate-test-reporter (0.2.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
@@ -173,6 +177,11 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pg (0.17.1)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
@@ -342,6 +351,7 @@ DEPENDENCIES
   json_spec
   letter_opener
   letter_opener_web (~> 1.1.0)
+  paperclip (~> 4.1)
   pg
   pry
   pry-byebug
