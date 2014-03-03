@@ -12,3 +12,5 @@
  *= require jquery.ui.all
  *= require_tree .
  */
+#map label { width: auto; display:inline; }
+#map img { max-width: none; }
