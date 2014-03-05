@@ -39,7 +39,7 @@ class Event < ActiveRecord::Base
   has_many :admin_invites, -> { merge(EventInvite.admins) }, class_name: 'EventInvite'
   has_many :admin_users, through: :admin_invites, source: :user
 
-  has_attached_file :picture, styles: { small: "100x100#", medium: "320x175>" }
+  has_attached_file :picture, styles: { small: "100x100#", medium: "320x200>" }
 
   validates_with AttachmentContentTypeValidator, attributes: :picture, content_type: ["image/jpg", "image/gif", "image/png"]
 
