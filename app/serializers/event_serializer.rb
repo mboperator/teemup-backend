@@ -27,4 +27,8 @@ class EventSerializer < ActiveModel::Serializer
     "http://teemup.us#{object.picture.url(:medium)}"
   end
 
+  def start_time
+    object.start_time.in_time_zone('UTC')
+  end
+
 end
