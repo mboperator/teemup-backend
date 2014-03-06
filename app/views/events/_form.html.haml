@@ -69,7 +69,7 @@
     .span2.offset1
       %h4 Date and Time
       = e.label :start_time
-      = e.text_field :start_time
+      = e.text_field :start_time, value: @event.start_time
 
       = label_tag :duration, "Duration Hours"
       = e.number_field :duration, step: 0.25, value: @event.duration / 3600
