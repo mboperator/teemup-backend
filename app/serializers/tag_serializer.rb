@@ -6,7 +6,7 @@ class TagSerializer < ActiveModel::Serializer
   end
 
   def count
-    object.events.where("start_time > ?", Time.now).where("start_time < ?", Time.now + (60*60*24)).count
+    object.events.current.count
   end
 
 end

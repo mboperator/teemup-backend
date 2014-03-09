@@ -41,6 +41,8 @@ class Event < ActiveRecord::Base
 
   has_attached_file :picture, styles: { small: "100x100#", medium: "320x200>" }
 
+  scope :current, -> { where("start_time > ?", Time.now.utc) } 
+
   validates_with AttachmentContentTypeValidator, attributes: :picture, content_type: ["image/jpg", "image/gif", "image/png"]
 
   def end_time
