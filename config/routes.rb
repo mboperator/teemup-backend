@@ -2,6 +2,8 @@ require 'api_constraints'
 
 Teemup::Application.routes.draw do
 
+  get "tag/index"
+  get "tag/show"
   root 'sessions#new'
   match '/signup',   to: 'users#new',        via: 'get'
   match '/signin',   to: 'sessions#new',     via: 'get'
@@ -23,7 +25,11 @@ Teemup::Application.routes.draw do
       resources :locations, only: [:index, :show, :create]
       resources :groups, only: [:create, :index, :show, :update, :destroy] do
       	resources :events, only: [:create, :index, :show, :update, :destroy]
+        end
+      resources :tags, only: [:index, :show] do
+        resources :events, only: [:index, :show]
+        end
       end
     end
   end
-end
+

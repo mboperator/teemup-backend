@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     if signed_in?
       @user = current_user
       @group = Group.find(params[:group_id]) if params[:group_id]
+      @tag = Tag.find_by(name: params[:tag_id]) if params[:tag_id]
     else
       store_location
       redirect_to signout_path, notice: "Please sign in" and return
