@@ -7,12 +7,16 @@ module Api
       def index
         if params[:group_id]
           @group = Group.find_by(id: params[:group_id])
-          respond_with @group.events.where("start_time > ?", Time.now).order(:start_time)
+          respond_with @group.events.today
         elsif params[:tag_id]
           @tag = Tag.find_by(id: params[:tag_id])
-          respond_with @tag.events.where("start_time > ?", Time.now).order(:start_time)
+          respond_with @tag.events.today
+        elsif params[:day] == "tomorrow"
+          respond_with Event.tomorrow
+        elsif params[:day] == "later"
+          respond_with Event.later
         else
-          respond_with Event.where("start_time > ?", Time.now).order(:start_time)
+          respond_with Event.today
         end
 
       end
