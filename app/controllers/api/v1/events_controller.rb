@@ -5,20 +5,19 @@ module Api
       skip_before_filter :api_authorize, only: [:index, :show]
 
       def index
-        if params[:group_id]
-          @group = Group.find_by(id: params[:group_id])
-          respond_with @group.events.today
-        elsif params[:tag_id]
-          @tag = Tag.find_by(id: params[:tag_id])
-          respond_with @tag.events.today
-        elsif params[:day] == "tomorrow"
+        if params[:day] == "tomorrow"
+          respond_with @group.events.tomorrow if @group
+          respond_with @tag.events.tomorrow if @tag
           respond_with Event.tomorrow
         elsif params[:day] == "later"
+          respond_with @group.events.later if @group
+          respond_with @tag.events.later if @tag
           respond_with Event.later
         else
+          respond_with @group.events.today if @group
+          respond_with @tag.events.today if @tag
           respond_with Event.today
         end
-
       end
 
       def show
