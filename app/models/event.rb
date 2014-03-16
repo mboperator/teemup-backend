@@ -41,7 +41,9 @@ class Event < ActiveRecord::Base
 
   has_attached_file :picture, styles: { small: "100x100#", medium: "320x200>" }
 
-  scope :current, -> { where("start_time > ?", Time.now.utc) } 
+  scope :events_today, -> {{conditions: ['start_time > ? AND start_time < ?', DateTime.now.utc.to_date , DateTime.now.utc.to_date + 1.days]}}
+  scope :events_tomorrow, -> {{conditions: ['start_time > ? AND start_time < ?', DateTime.now.utc.to_date , DateTime.now.utc.to_date + 2.days]}}
+  scope :events_later, -> { where("start_time > ?", Time.now.utc.to_date + 3.days) }
 
   validates_with AttachmentContentTypeValidator, attributes: :picture, content_type: ["image/jpg", "image/gif", "image/png"]
 
