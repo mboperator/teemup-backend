@@ -9,37 +9,94 @@ body{
     width: 100%; 
     position: relative; 
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    padding: 25% 0 40% 0;
+    padding: 20% 0 20% 0;
     -webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
 }
+
+#outro { 
+    background: url(../images/back-6.jpg) 50% 0 fixed; 
+    height: auto;  
+    margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 20% 0 20% 0;
+    -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+}
 #home { 
-    background: url(../images/mapbox.jpg) center center fixed;
+    background: url(../images/mapbox.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment:fixed;
 	background-color: rgba(255,255,255);
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	height: auto;  
 	margin: 0 auto;
     width: 100%; 
     position: relative; 
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    padding: 22% 0;
+    padding: 15% 0;
 	color: rgb(255,255,255);
 }
 
-#about { 
-	background: url(../images/back-2.jpg) 50% 0 fixed; 
-	height: auto;
-	margin: 0 auto; 
+#home2 { 
+    background: url(../images/snapbox.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment:fixed;
+    background-color: rgba(255,255,255);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: auto;  
+    margin: 0 auto;
     width: 100%; 
     position: relative; 
-    -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
     padding: 15% 0;
+    color: rgb(255,255,255);
+}
+
+#about { 
+	background: url(../images/back-10.jpg); 
+	height: 50%;
+	margin: 0 auto; 
+    width: 100%; 
+    position: relative;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: .01% 0;
     color: #fff;
+}
+
+#info {
+    background: url(../images/back-3.jpg) center center fixed;
+    background-color: rgba(255,255,255);
+    height: 50%;
+    box-shadow: 0 0 rgba(0,0,0,0.8);
+    padding: 0% 0;
+    color: #fff;
+}
+
+#next {
+	background: url(../images/next.png) center center fixed;
+	background-color: rgba(255,255,255);
+	-webkit-background-size: cover;
+	-moz-background-seize: cover;
+	-o-background-seize: cover;
+	background-seize: cover;
+	box-shadow: 0 0 50px rgba(0,0,0,0.8);
+	padding: 0% 0;
+	color: #fff;
 }
 
 .banner{
@@ -56,6 +113,7 @@ body{
 
 .well{
 	background-color: rgba(0,0,0,0.8);
+    border: 0px;
 }
 
 .em{
@@ -63,4 +121,72 @@ body{
 }
 .em0{
 	color: rgba(21,123,178,1);
+}
+
+.custom_nav .navbar.navbar-fixed-top .navbar-inner{
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.scale {
+	width: 50%;
+	height: 50%;
+}
+
+.buttons {
+    opacity: 0.6;
+    color: #ffffff;
+    height: 30%;
+    padding-top: 50px;
+    -webkit-filter: invert(90%);
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;  
+}
+
+.buttons:hover{
+    opacity:1.0;
+    -webkit-filter: invert(100%); ;
+}
+
+.buttons2 {
+    opacity: 0.3;
+    height: 30%;
+    padding-top: 50px;
+    transition-property: opacity;
+    transition-duration: .4s;
+    transition-timing-function: linear;  
+}
+
+.buttons2:hover{
+    opacity:1.0 ;
+}
+
+#non{
+	padding-top: 20%;
+    margin-top: 20%;
+}
+
+#non2{
+	padding-top: 10%;
+    margin-top: 10%;
+}
+
+figure img {
+	margin-top: 20%;
+}
+
+#one
+{
+    background: url(../images/mapbox.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment:fixed;
+}
+
+#two
+{
+    background: url(http://img01.static-nextag.com/image/GMC-Denali-Road-Bike/1/000/006/107/006/610700673.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment:fixed;
 }
