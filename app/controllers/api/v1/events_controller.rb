@@ -6,17 +6,17 @@ module Api
 
       def index
         if params[:day] == "tomorrow"
-          respond_with @group.events.tomorrow if @group
-          respond_with @tag.events.tomorrow if @tag
-          respond_with Event.tomorrow
+          respond_with @group.events.tomorrow.order('start_time ASC') if @group
+          respond_with @tag.events.tomorrow.order('start_time ASC') if @tag
+          respond_with Event.tomorrow.order('start_time ASC')
         elsif params[:day] == "later"
-          respond_with @group.events.later if @group
-          respond_with @tag.events.later if @tag
-          respond_with Event.later
+          respond_with @group.events.later.order('start_time ASC') if @group
+          respond_with @tag.events.later.order('start_time ASC') if @tag
+          respond_with Event.later.order('start_time ASC')
         else
-          respond_with @group.events.today if @group
-          respond_with @tag.events.today if @tag
-          respond_with Event.today
+          respond_with @group.events.today.order('start_time ASC') if @group
+          respond_with @tag.events.today.order('start_time ASC') if @tag
+          respond_with Event.today.order('start_time ASC')
         end
       end
 
