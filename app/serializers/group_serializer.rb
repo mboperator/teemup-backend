@@ -10,7 +10,7 @@ class GroupSerializer < ActiveModel::Serializer
   end
 
   def count
-    object.events.where("start_time > ?", Time.now).count
+    object.events.today.count
   end
 
 end

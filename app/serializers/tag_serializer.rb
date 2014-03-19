@@ -6,7 +6,7 @@ class TagSerializer < ActiveModel::Serializer
   end
 
   def count
-    object.events.current.count
+    object.events.today.count
   end
 
 end
