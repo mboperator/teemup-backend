@@ -46,11 +46,26 @@ class Event < ActiveRecord::Base
   scope :tomorrow, -> {{conditions: ['start_time > ? AND start_time < ?', DateTime.now.utc.to_date + 1.days , DateTime.now.utc.to_date + 2.days]}}
   scope :later, -> { where("start_time > ?", Time.now.utc.to_date + 3.days) }
 
+  scope :ascending, -> {order('start_time ASC')}
+
+
   validates_with AttachmentContentTypeValidator, attributes: :picture, content_type: ["image/jpg", "image/gif", "image/png"]
+
+  def self.for(day)
+    if day == 'today'
+      return self.today
+    elsif day == 'tomorrow'
+      return self.tomorrow
+    else
+      return self.later
+    end
+  end
 
   def end_time
     start_time + duration
   end
+
+
 
 end
 

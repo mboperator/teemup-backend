@@ -5,20 +5,18 @@ module Api
       skip_before_filter :api_authorize, only: [:index, :show]
 
       def index
-        if params[:day] == "tomorrow"
-          respond_with current_group.events.tomorrow.order('start_time ASC') if current_group
-          respond_with current_tag.events.tomorrow.order('start_time ASC') if current_tag
-          respond_with Event.tomorrow.order('start_time ASC')
-        elsif params[:day] == "later"
-          respond_with current_group.events.later.order('start_time ASC') if current_group
-          respond_with current_tag.events.later.order('start_time ASC') if current_tag
-          respond_with Event.later.order('start_time ASC')
-        else
-          respond_with current_group.events.today.order('start_time ASC') if current_group
-          respond_with current_tag.events.today.order('start_time ASC') if current_tag
-          respond_with Event.today.order('start_time ASC')
+        day = params[:day]
+        events =
+          if current_group
+            current_group.events.for(day).ascending
+          elsif current_tag
+            current_tag.events.for(day).ascending
+          else
+            Event.for(day).ascending
+          end
+
+        render json: { events: events, success: true }, status: :ok
         end
-      end
 
       def show
         respond_with Event.find_by(id: params[:id]), serializer: EventDetailSerializer
