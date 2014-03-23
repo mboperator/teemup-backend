@@ -10,4 +10,8 @@ module ApiHelper
   def current_group
     Group.find_by(id: params[:group_id]) if params[:group_id]
   end
+
+  def current_tag
+    Tag.find_by(id: params[:tag_id]) if params[:tag_id]
+  end
 end
