@@ -37,8 +37,8 @@
           %i= "Created by: #{@event.created_by.full_name}"
       %tr
         %td
-          %button.btn.btn-mini.btn-info= link_to "Edit", edit_group_event_path(@group, @event)
-          %button.btn.btn-mini.btn-warning= link_to "Destroy", group_event_path(@group, @event), method: 'delete'
+          %button.btn.btn-mini.btn-info= link_to "Edit", edit_group_event_path(current_group, @event)
+          %button.btn.btn-mini.btn-warning= link_to "Destroy", group_event_path(current_group, @event), method: 'delete'
   .span5{style: "height:150px; overflow-y: auto;"}
     %p= @event.description
   %p= image_tag @event.picture.url(:medium)
