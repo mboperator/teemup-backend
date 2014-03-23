@@ -27,8 +27,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    @group = Group.find_by(id: params[:id])
-    @group.destroy
+    current_group.destroy
     redirect_to groups_url
   end
 

@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find_by(id: params[:id])
     @event.destroy
-    redirect_to group_url(@group)
+    redirect_to group_url(current_group)
   end
 
   private
