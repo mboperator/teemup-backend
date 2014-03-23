@@ -52,7 +52,7 @@
       #map{style: "height:300px; width:100%;"}
       #legend You can drag and drop the marker to the correct location
 %row.span10
-  = form_for [@group, @event] do |e|
+  = form_for [current_group, @event] do |e|
     .span2
       %h4 Details
       = e.label 'Address'
@@ -79,7 +79,7 @@
       = e.file_field :picture
 
       = e.hidden_field :created_by_id, value: current_user.id
-      = e.hidden_field :group_id, value: @group.id
+      = e.hidden_field :group_id, value: current_group.id
 
 
       = hidden_field :location, :lat, id: "lat"
