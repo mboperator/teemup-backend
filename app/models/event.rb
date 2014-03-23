@@ -49,7 +49,7 @@ class Event < ActiveRecord::Base
   scope :ascending, -> {order('start_time ASC')}
 
 
-  validates_with AttachmentContentTypeValidator, attributes: :picture, content_type: ["image/jpg", "image/gif", "image/png"]
+  validates_with AttachmentContentTypeValidator, attributes: :picture, content_type: ["image/jpeg", "image/gif", "image/png"]
 
   def self.for(day)
     if day == 'today'
