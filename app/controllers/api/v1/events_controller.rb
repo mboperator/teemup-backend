@@ -15,7 +15,7 @@ module Api
             Event.for(day).ascending
           end
 
-        render json: { events: events, success: true }, status: :ok, serializer: EventSerializer
+        respond_with events
         end
 
       def show
