@@ -20,7 +20,7 @@ module SessionsHelper
   end
 
   def current_group
-    @group
+    @group ||= Group.find(params[:group_id]) if params[:group_id]
   end
 
   def sign_out

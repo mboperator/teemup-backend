@@ -23,8 +23,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new(duration: 3600)
-    loc = Location.new(lat: 34.4155193, lon:-119.8511707)
-    @event.location = loc
+    @event.location = default_location
   end
 
   def show
@@ -63,5 +62,8 @@ class EventsController < ApplicationController
     .permit(:lat, :lon)
   end
 
+  def default_location
+    Location.new(lat: 34.4155193, lon:-119.8511707)
+  end
 end
 
