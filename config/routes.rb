@@ -5,12 +5,10 @@ Teemup::Application.routes.draw do
   get "tag/index"
   get "tag/show"
   root 'sessions#new'
-  match '/signup',   to: 'users#new',        via: 'get'
   match '/signin',   to: 'sessions#new',     via: 'get'
   match '/signout',  to: 'sessions#destroy', via: ['get', 'delete']
 
   resources :sessions, only: [:new, :create, :destroy]
-  resources :users
   resources :events, only: [:index, :show]
   resources :groups do
     resources :events

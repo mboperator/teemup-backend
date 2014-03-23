@@ -4,6 +4,3 @@
       = f.text_field :email, class: 'sign-in-form span-row', placeholder: 'Email', autofocus: 'true'
       = f.password_field :password, class: 'sign-in-form span-row', placeholder: 'Password', autocomplete: :off
       = f.submit 'Sign In', class: 'btn-brand top-margin'
-      .top-padded
-        %span.medium.muted.bold Not a memeber yet?
-        = link_to "Sign up", signup_path, class: "brand-link medium"
