@@ -9,6 +9,7 @@ Teemup::Application.routes.draw do
   match '/signout',  to: 'sessions#destroy', via: ['get', 'delete']
 
   resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create]
   resources :events, only: [:index, :show]
   resources :groups do
     resources :events
