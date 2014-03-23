@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   skip_before_filter :authorize
+  http_basic_authenticate_with name: "shin", password: "marcusisthebest"
 
   def new
     @user = User.new
-    render layout: "account"
   end
 
   def create
@@ -14,10 +14,6 @@ class UsersController < ApplicationController
     else
       render "new", layout: "account"
     end
-  end
-
-  def index
-    @users = User.all
   end
 
   private
