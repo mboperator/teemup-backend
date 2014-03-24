@@ -42,8 +42,8 @@ class Event < ActiveRecord::Base
 
   has_attached_file :picture, styles: { small: "100x100#", medium: "320x200>" }
 
-  scope :today, -> {{conditions: ['start_time > ? AND start_time < ?', DateTime.now.utc.to_date , DateTime.now.utc.to_date + 1.days]}}
-  scope :tomorrow, -> {{conditions: ['start_time > ? AND start_time < ?', DateTime.now.utc.to_date + 1.days , DateTime.now.utc.to_date + 2.days]}}
+  scope :today, -> {where('start_time > ? AND start_time < ?', DateTime.now.utc.to_date , DateTime.now.utc.to_date + 1.days)}
+  scope :tomorrow, -> {where('start_time > ? AND start_time < ?', DateTime.now.utc.to_date + 1.days , DateTime.now.utc.to_date + 2.days)}
   scope :later, -> { where("start_time > ?", Time.now.utc.to_date + 3.days) }
 
   scope :ascending, -> {order('start_time ASC')}
