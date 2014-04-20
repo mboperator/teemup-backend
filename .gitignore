@@ -41,4 +41,5 @@
 
 /config/database.yml
 public/system/events/pictures/*
+.ruby-version
 
