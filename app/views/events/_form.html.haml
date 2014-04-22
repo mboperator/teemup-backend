@@ -72,9 +72,9 @@
       = e.text_field :start_time, value: @event.start_time
 
       = e.label :daily_event
-      = e.check_box :daily_event, value: false
+      = e.check_box :daily_event, value: @event.daily_event
       = e.label :weekly_event
-      = e.check_box :weekly_event, value: false
+      = e.check_box :weekly_event, value: @event.weekly_event
 
       = label_tag :duration, "Duration Hours"
       = e.number_field :duration, step: 0.25, value: @event.duration / 3600
