@@ -5,7 +5,8 @@ module Api
       skip_before_filter :api_authorize, only: [:index, :show]
 
       def index
-        day = params[:day]
+        day = 'today'
+        day = params[:day] if params[:day]
         events =
           if current_group
             current_group.events.for(day).ascending

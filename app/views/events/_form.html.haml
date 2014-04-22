@@ -71,16 +71,20 @@
       = e.label :start_time
       = e.text_field :start_time, value: @event.start_time
 
+      = e.label :daily_event
+      = e.check_box :daily_event, value: false
+      = e.label :weekly_event
+      = e.check_box :weekly_event, value: false
+
       = label_tag :duration, "Duration Hours"
       = e.number_field :duration, step: 0.25, value: @event.duration / 3600
 
     .span2.offset1
       %h4 Upload Picture
-      = e.file_field :picture
+      = e.file_field :picture, value: @event.picture
 
       = e.hidden_field :created_by_id, value: current_user.id
       = e.hidden_field :group_id, value: current_group.id
-
 
       = hidden_field :location, :lat, id: "lat"
       = hidden_field :location, :lon, id: "lng"

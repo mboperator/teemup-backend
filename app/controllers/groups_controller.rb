@@ -16,6 +16,8 @@ class GroupsController < ApplicationController
     if @group.save
       current_user.group_memberships.create(group_id: @group.id, is_admin: true, is_confirmed: true)
       redirect_to @group, notice: 'Group was successfully created.'
+    else
+      redirect_to groups_path, notice: 'Failed to create group.'
     end
   end
 

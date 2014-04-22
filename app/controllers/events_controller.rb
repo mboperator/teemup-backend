@@ -37,7 +37,7 @@ class EventsController < ApplicationController
                                 .merge(location_id: loc.id))
       @event.duration = @event.duration * 3600
       @event.save
-      redirect_to [@group, @event] , notice: 'Event was successfully updated.'
+      redirect_to current_group , notice: 'Event was successfully updated.'
     end
   end
 

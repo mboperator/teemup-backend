@@ -42,9 +42,13 @@ class Event < ActiveRecord::Base
 
   has_attached_file :picture, styles: { small: "100x100#", medium: "320x200>" }
 
-  scope :today, -> {where('start_time > ? AND start_time < ?', DateTime.now.utc.to_date , DateTime.now.utc.to_date + 1.days)}
-  scope :tomorrow, -> {where('start_time > ? AND start_time < ?', DateTime.now.utc.to_date + 1.days , DateTime.now.utc.to_date + 2.days)}
-  scope :later, -> { where("start_time > ?", Time.now.utc.to_date + 3.days) }
+  scope :today, -> {where('start_time > ? AND start_time < ?', DateTime.now.to_date , DateTime.now.to_date + 1.days)}
+  scope :tomorrow, -> {where('start_time > ? AND start_time < ?', DateTime.now.to_date + 1.days , DateTime.now.to_date + 2.days)}
+  scope :later, -> {where("start_time > ?", Time.now.to_date + 3.days)}
+  scope :past, -> {where("start_time < ?", Time.now.to_date)}
+
+  scope :daily_recurring, -> {where("daily_event", true)}
+  scope :weekly_recurring, -> {where("weekly_event", true)}
 
   scope :ascending, -> {order('start_time ASC')}
 
@@ -52,6 +56,19 @@ class Event < ActiveRecord::Base
   validates_with AttachmentContentTypeValidator, attributes: :picture, content_type: ["image/jpeg", "image/gif", "image/png"]
 
   def self.for(day)
+
+    if daily_recurring.merge(past).count != 0
+      daily_recurring.merge(past).each do |e|
+        e.starting_time
+      end
+
+    elsif weekly_recurring.merge(past).count != 0
+      weekly_recurring.merge(past).each do |e|
+        e.starting_time
+      end
+
+    end
+
     if day == 'today'
       return self.today
     elsif day == 'tomorrow'
@@ -59,12 +76,38 @@ class Event < ActiveRecord::Base
     else
       return self.later
     end
+
   end
 
   def end_time
     start_time + duration
   end
 
+
+  def starting_time
+    if daily_event
+
+      if end_time > DateTime.now
+        self.start_time
+      else
+        self.start_time = self.start_time + (self.start_time.to_date - DateTime.now.to_date).abs.days
+        self.save
+        self.start_time
+      end
+
+    elsif weekly_event
+
+      while end_time < DateTime.now
+        self.start_time = self.start_time + 7.days
+      end
+      self.save
+      self.start_time
+
+    else
+      self.start_time
+    end
+
+  end
 
 
 end
