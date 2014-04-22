@@ -37,7 +37,7 @@ class EventsController < ApplicationController
                                 .merge(location_id: loc.id))
       @event.duration = @event.duration * 3600
       @event.save
-      redirect_to [@group, @event] , notice: 'Event was successfully updated.'
+      redirect_to current_group , notice: 'Event was successfully updated.'
     end
   end
 
@@ -54,7 +54,7 @@ class EventsController < ApplicationController
   private
   def event_params
     params.require(:event)
-    .permit(:name, :subtitle, :created_by_id, :group_id, :start_time, :duration, :description, :picture, :location_name, tag_ids: [])
+    .permit(:name, :subtitle, :created_by_id, :group_id, :start_time, :duration, :description, :picture, :location_name, :daily_event, :weekly_event, tag_ids: [])
   end
 
   def location_params

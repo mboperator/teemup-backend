@@ -30,5 +30,5 @@ class EventInvite < ActiveRecord::Base
   def revoke_admin
     update_attributes(is_admin: false)
   end
+  
 end
-

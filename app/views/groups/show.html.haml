@@ -13,7 +13,7 @@
 
       %tr
         %td
-          = ev.start_time.strftime("%b %d %Y")
+          = ev.starting_time.strftime("%b %d %Y")
         %td
           = link_to ev.name, group_event_path(@group, ev)
         %td
