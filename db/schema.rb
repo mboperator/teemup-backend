@@ -26,35 +26,31 @@ ActiveRecord::Schema.define(version: 20140422224647) do
   add_index "api_keys", ["user_id"], :name => "index_api_keys_on_user_id"
 
   create_table "event_invites", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.boolean  "is_admin"
-    t.boolean  "is_confirmed"
+    t.integer  "user_id",                      null: false
+    t.integer  "event_id",                     null: false
+    t.boolean  "is_admin",     default: false
+    t.boolean  "is_confirmed", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "events", force: true do |t|
-    t.text     "name",                      null: false
+    t.text     "name",                                 null: false
     t.text     "description"
-    t.integer  "created_by_id",             null: false
+    t.integer  "created_by_id",                        null: false
     t.integer  "group_id"
-    t.integer  "location_id",               null: false
-    t.datetime "start_time",                null: false
+    t.integer  "location_id",                          null: false
+    t.datetime "start_time",                           null: false
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "header_image_file_name"
-    t.string   "header_image_content_type"
-    t.integer  "header_image_file_size"
-    t.datetime "header_image_updated_at"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.string   "location_name"
-    t.boolean  "daily_event"
-    t.boolean  "weekly_event"
+    t.boolean  "daily_event",          default: false
+    t.boolean  "weekly_event",         default: false
   end
 
   add_index "events", ["daily_event"], :name => "index_events_on_daily_event"
@@ -119,5 +115,9 @@ ActiveRecord::Schema.define(version: 20140422224647) do
     t.string   "password_digest"
     t.integer  "location_id"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["phone_number"], :name => "index_users_on_phone_number", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token", :unique => true
 
 end
