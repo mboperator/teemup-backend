@@ -58,7 +58,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-remote'
   gem 'rspec-rails'
-  gem 'spring'
+  gem 'spring', '~> 1.1.2'
 end
 
 group :production do

@@ -282,7 +282,7 @@ GEM
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
     slop (3.4.7)
-    spring (1.1.0)
+    spring (1.1.2)
     spring-commands-cucumber (1.0.1)
       spring (>= 0.9.1)
     spring-commands-rspec (1.0.1)
@@ -377,7 +377,7 @@ DEPENDENCIES
   simplecov
   sinatra
   slim
-  spring
+  spring (~> 1.1.2)
   spring-commands-cucumber
   spring-commands-rspec
   squeel
