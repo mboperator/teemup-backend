@@ -1,4 +1,8 @@
 ###TeemUp Rails Backend
 
-This is a simple rails backend for a event aggregator.
+API backend for the TeemUp event discovery mobile application.
 
+Todo: 
+Implement Users
+Implement RSS Pulling
+Implement Outside Event APIs
